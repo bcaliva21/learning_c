@@ -1,6 +1,55 @@
 #include <stdio.h>
 #define COUNT 5
 
+void times2(int *a, int len)
+{
+	for (int i = 0; i < len; i++)
+		printf("%d\n", a[i] * 2);
+}
+
+int arrays_to_functions(void)
+{
+	int x[5] = {11, 22, 33, 44, 55};
+
+	times2(x, 5);
+}
+
+int pointers(void)
+{
+	int a[5] = {1,2,3,4,5};
+	int *p;
+
+	p = &a[1];
+
+	printf("%d\n", *p); // prints 2
+}
+
+int multi_dimension(void)
+{
+	int row, col;
+
+	int a[2][5] = {
+		{0, 1, 2, 3, 4},
+		{5, 6, 7, 8, 9}
+	};
+
+	for (row = 0; row < 2; row++) {
+		for (col = 0; col < 5; col++) {
+			printf("(%d,%d) = %d\n", row, col, a[row][col]);
+		}
+	}
+}
+
+int out_of_bounds(void)
+{
+	int i;
+	int a[5] = {22, 37, 3490, 18, 95};
+
+	for (i = 0; i < 10; i++) {
+		printf("%d\n", a[i]);
+	}
+}
+
 int initialization(void)
 {
 	int a[5] = {33, 34, 1234};
@@ -44,5 +93,6 @@ int getting_the_length(void)
 
 int main(void)
 {
-	getting_the_length();
+	arrays_to_functions();
 }
+
