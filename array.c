@@ -1,10 +1,57 @@
 #include <stdio.h>
 #define COUNT 5
 
+void print_2D_array(int a[2][3])
+{
+	for (int row = 0; row < 2; row++) {
+		for (int col = 0; col < 3; col++) 
+			printf("%d ", a[row][col]);
+		printf("\n");
+	}
+}
+
+int two_dimensions(void)
+{
+	int x[2][3] = {
+		{1, 2, 3},
+		{4, 5, 6}
+	};
+
+	print_2D_array(x);
+}
+
+void double_array(int *a, int len)
+{
+	for (int i = 0; i < len; i++)
+		a[i] *= 2;
+}
+
+int change_array_in_functions(void)
+{
+	int x[5] = {1, 2, 3, 4, 5};
+
+	double_array(x, 5);
+
+	for (int i = 0; i < 5; i++)
+		printf("%d\n", x[i]); // 2, 4, 6, 8, 10!
+}
+
 void times2(int *a, int len)
 {
 	for (int i = 0; i < len; i++)
 		printf("%d\n", a[i] * 2);
+}
+
+void times3(int a[], int len)
+{
+	for (int i = 0; i < len; i++)
+		printf("%d\n", a[i] * 3);
+}
+
+void times4(int a[5], int len)
+{
+	for (int i = 0; i < len; i++)
+		printf("%d\n", a[i] * 4);
 }
 
 int arrays_to_functions(void)
@@ -93,6 +140,6 @@ int getting_the_length(void)
 
 int main(void)
 {
-	arrays_to_functions();
+	two_dimensions();
 }
 
