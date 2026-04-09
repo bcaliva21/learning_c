@@ -6,7 +6,7 @@ int main(void)
 	struct u_state user_start_state = {100, 100, 100};
 	struct user hero, *h; 
 
-	h->name = ""; 
+	h = &hero;
 	h->state = &user_start_state;
 
 	char knowsName;
@@ -15,9 +15,13 @@ int main(void)
 
 	if (knowsName == 'y') {
 		printf("What is your name?\n");
-		scanf(" %c", h->name);
+		scanf("%49s", h->name);
 	} else {
 		printf("Ohh, well we can go with Unknown for now.\n");
-		h->name = "Unknown";
+		snprintf(h->name, sizeof(h->name), "Unknown");
 	}
+
+	printf("Hello, %s!\n", h->name);
+
+	return 0;
 }

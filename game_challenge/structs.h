@@ -9,7 +9,7 @@ struct u_state {
 };
 
 struct user {
-    char *name;
+    char name[100];
     struct u_state *state;
 };
 
