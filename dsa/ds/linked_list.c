@@ -122,7 +122,7 @@ void logValues(MyLinkedList *obj)
 	}
 }
 
-void myLinkedListFree(MyLinkedList* obj) {
+void myLinkedListFree(MyLinkedList *obj) {
 	Node *c = obj->head;
 	Node *d;
 
@@ -134,23 +134,22 @@ void myLinkedListFree(MyLinkedList* obj) {
 	free(obj);
 }
 
-// int main(void)
-// {
-// 	MyLinkedList *obj = myLinkedListCreate();
-// 	// printf("%d\n", obj->head->val);
+int main(void)
+{
+	MyLinkedList *obj = myLinkedListCreate();
+	// printf("%d\n", obj->head->val);
 
-// 	myLinkedListAddAtHead(obj, 420);
-// 	// printf("%d\n", obj->head->val);
+	myLinkedListAddAtHead(obj, 1);
+	// printf("%d\n", obj->head->val);
 
-// 	myLinkedListAddAtHead(obj, 69);
-// 	// printf("%d\n", obj->head->val);
+	myLinkedListAddAtHead(obj, 2);
+	// printf("%d\n", obj->head->val);
+	myLinkedListAddAtHead(obj, 3);
+	myLinkedListAddAtHead(obj, 4);
+	myLinkedListAddAtHead(obj, 5);
 
-// 	logValues(obj);
-// 	printf("%d\n", myLinkedListGet(obj, 0));
-// 	printf("%d\n", myLinkedListGet(obj, 1));
-// 	printf("%d\n", myLinkedListGet(obj, 2));
-// 	printf("%d\n", myLinkedListGet(obj, 3));
-// }
+	logValues(obj);
+}
 
 /**
  * Your MyLinkedList struct will be instantiated and called as such:
