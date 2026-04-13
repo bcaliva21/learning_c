@@ -82,21 +82,21 @@ TreeNode *find_inorder_successor(TreeNode *node)
 	return node;
 }
 
-void *deleteNode(TreeNode *node, int del)
+TreeNode *deleteNode(TreeNode *node, int del)
 {
-	if (node == NULL) return;
+	if (node == NULL) return NULL;
 
 	if (del < node->data) {
 		node->left = deleteNode(node->left, del);
 	} else if (del > node->data) {
-		node->right = deleteNode(node->right, del):
+		node->right = deleteNode(node->right, del);
 	} else {
 		if (node->left == NULL) {
-			TempNode *temp = node->right;
+			TreeNode *temp = node->right;
 			free(node);
 			return temp;
 		} else if (node->right == NULL) {
-			TempNode *temp = node->left;
+			TreeNode *temp = node->left;
 			free(node);
 			return temp;
 		}
@@ -151,17 +151,11 @@ TreeNode *search(TreeNode *node, int target)
 
 void testTraversalPatterns(TreeNode *node)
 {
-	printf("---INORDER TRAVERSAL BEGIN---\n");
 	inorder_traversal(node);
-	printf("---INORDER TRAVERSAL END---\n");
 
-	printf("---POSTORDER TRAVERSAL BEGIN---\n");
 	postorder_traversal(node);
-	printf("---POSTORDER TRAVERSAL END---\n");
 
-	printf("---PREORDER TRAVERSAL BEGIN---\n");
 	preorder_traversal(node);
-	printf("---PREORDER TRAVERSAL END---\n");
 }
 
 void free_tree(BinarySearchTree *bst)
@@ -191,12 +185,27 @@ int main(void)
 	TreeNode *node10 = create_node(10, node5, node20);
 	bst->head = node10;
 
+	inorder_traversal(bst->head);
+
+	printf("---ADD NODE 3---\n");
 	TreeNode *node3 = create_node(3, NULL, NULL);
 
 	insert(bst->head, node3);
 	printf("This should be 3: %d\n", node3->data);
 
-	deleteNode(bst->head, NULL, 3, 'n');
+	printf("---INORDER TRAVERSAL---\n");
+	inorder_traversal(bst->head);
+
+	printf("---DELETE 3---\n");
+	deleteNode(bst->head, 3);
+
+	printf("---INORDER TRAVERSAL---\n");
+	inorder_traversal(bst->head);
+
+	printf("---DELETE 10---\n");
+	deleteNode(bst->head, 10);
+	printf("---INORDER TRAVERSAL---\n");
+	inorder_traversal(bst->head);
 
 	free_node(bst->head);
 	free_tree(bst);
