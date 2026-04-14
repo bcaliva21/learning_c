@@ -81,6 +81,9 @@ bool insert_person(HashMap *hm, Person *p)
 	if (hm->arr[index] != NULL) {
 		do {
 			index++;
+			if (index >= hm->max_size) {
+				index = 0;
+			}
 		} while (hm->arr[index] != NULL);
 	}
 
