@@ -2,7 +2,7 @@
 
 int is_palindrone(char *start, char *end)
 {
-	while (start != end) {
+	while (start < end) {
 		if (*start == *end) {
 			start++;
 			end--;
@@ -15,13 +15,18 @@ int is_palindrone(char *start, char *end)
 
 int main(void)
 {
-	char str[12];
+	char str[20];
 	long long int max = 0;
 
-	for (int top = 999; top > 99; top--) {
-		for (int bot = 999; bot > 99; bot--) {
+	for (long long int top = 999; top > 99; top--) {
+		if (top * top <= max) break;
+		for (long long int bot = top; bot > 99; bot--) {
+			// printf("top: %lld, bot: %lld\n", top, bot);
 			long long int product = top * bot;
 			sprintf(str, "%lld", product);
+			// printf("Product: %lld\n", product);
+
+			if (product <= max) break;
 
 			char *p = str;
 			char *temp;
@@ -30,15 +35,16 @@ int main(void)
 				p++;
 			}
 			if (is_palindrone(str, temp) == 1) {
+				printf("new max? %lld\n", product);
+				printf("top %lld\n", top);
+				printf("bot %lld\n", bot);
 				if (product > max) max = product;
-				// printf("found it!\n");
-				// printf("%s\n", str);
 			}
 		}
 	}
 	printf("%lld\n", max);
 
 	// sprintf(str, "%d", 42);
-
+	
 	return 0;
 }
