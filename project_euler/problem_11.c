@@ -2,6 +2,14 @@
 
 int main(void)
 {
+	unsigned long int calculate_up(int data[20][20], int row, int col);
+	unsigned long int calculate_down(int data[20][20], int row, int col);
+	unsigned long int calculate_left(int data[20][20], int row, int col);
+	unsigned long int calculate_right(int data[20][20], int row, int col);
+	unsigned long int calculate_left_up(int data[20][20], int row, int col);
+	unsigned long int calculate_right_up(int data[20][20], int row, int col);
+	unsigned long int calculate_left_down(int data[20][20], int row, int col);
+	unsigned long int calculate_right_down(int data[20][20], int row, int col);
 
 	int data[20][20] = {
         {8, 2, 22, 97, 38, 15, 0, 40, 0, 75, 4, 5, 7, 78, 52, 12, 50, 77, 91, 8},
@@ -37,5 +45,78 @@ int main(void)
 		{-1, -1}, // ul
 	}
 
+	unsigned long int max_product = 0;
+
+	for (int i = 0; i < 20; i++) {
+		for (int j = 0; j < 20; j++) {
+			unsigned long int product = calculate_up(data, i, j) 
+			if (product > max_product) {
+				max_product = product;
+			}
+			product = calculate_right_up(data, i, j);
+			if (product > max_product) {
+				max_product = product;
+			}
+
+			product = calculate_right(data, i, j);
+			if (product > max_product) {
+				max_product = product;
+			}
+
+			product = calculate_right_down(data, i, j);
+			if (product > max_product) {
+				max_product = product;
+			}
+
+			product = calculate_down(data, i, j);
+			if (product > max_product) {
+				max_product = product;
+			}
+
+			product = calculate_left_down(data, i, j);
+			if (product > max_product) {
+				max_product = product;
+			}
+
+			product = calculate_left(data, i, j);
+			if (product > max_product) {
+				max_product = product;
+			}
+
+			product = calculate_left_up(data, i, j);
+			if (product > max_product) {
+				max_product = product;
+			}
+
+		}
+	}
+
 	return 0;
 }
+
+unsigned long int calculate_up(int data[20][20], int row, int col)
+{
+	unsigned long int product = 1;
+	for (int i = -1; i > -5; i--) {
+		if (row+i > 0) {
+			product *= data[row+i][col];
+		}
+	}
+
+	return product;
+}
+
+unsigned long int calculate_right_up(int data[20][20], int row, int col)
+{
+	unsigned long int product = 1;
+	for (int i = -1; i > -5; i--) {
+		if (row+i > 0) {
+			product *= data[row+i][col];
+		}
+	}
+
+	return product;
+}
+
+
+
