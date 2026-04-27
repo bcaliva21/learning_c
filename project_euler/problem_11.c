@@ -34,22 +34,22 @@ int main(void)
         {1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48}
     };
 
-	int directions[8][2] = {
-		{-1, 0}, // u
-		{-1, 1}, // ur
-		{0, 1}, // r
-		{1, 1}, // dr
-		{1, 0}, // d
-		{1, -1}, // dl
-		{0, -1}, // l
-		{-1, -1}, // ul
-	}
+	// int directions[8][2] = {
+	// 	{-1, 0}, // u
+	// 	{-1, 1}, // ur
+	// 	{0, 1}, // r
+	// 	{1, 1}, // dr
+	// 	{1, 0}, // d
+	// 	{1, -1}, // dl
+	// 	{0, -1}, // l
+	// 	{-1, -1}, // ul
+	// };
 
 	unsigned long int max_product = 0;
 
 	for (int i = 0; i < 20; i++) {
 		for (int j = 0; j < 20; j++) {
-			unsigned long int product = calculate_up(data, i, j) 
+			unsigned long int product = calculate_up(data, i, j);
 			if (product > max_product) {
 				max_product = product;
 			}
@@ -91,6 +91,7 @@ int main(void)
 		}
 	}
 
+	printf("%ld\n", max_product);
 	return 0;
 }
 
@@ -98,7 +99,7 @@ unsigned long int calculate_up(int data[20][20], int row, int col)
 {
 	unsigned long int product = 1;
 	for (int i = -1; i > -5; i--) {
-		if (row+i > 0) {
+		if (row+i > 0 && row+i < 20) {
 			product *= data[row+i][col];
 		}
 	}
@@ -109,8 +110,45 @@ unsigned long int calculate_up(int data[20][20], int row, int col)
 unsigned long int calculate_right_up(int data[20][20], int row, int col)
 {
 	unsigned long int product = 1;
-	for (int i = -1; i > -5; i--) {
-		if (row+i > 0) {
+	for (int i = 1; i < 5; i++) {
+		long int neg = i * -1;
+		if ((row+neg > 0 && row+neg < 20) && (col+i > 0 && col+i < 20)) {
+			product *= data[row+neg][col+i];
+		}
+	}
+
+	return product;
+}
+
+unsigned long int calculate_right(int data[20][20], int row, int col)
+{
+	unsigned long int product = 1;
+	for (int i = 1; i < 5; i++) {
+		if (col+i > 0 && col+i < 20) {
+			product *= data[row][col+i];
+		}
+	}
+
+	return product;
+}
+
+unsigned long int calculate_right_down(int data[20][20], int row, int col)
+{
+	unsigned long int product = 1;
+	for (int i = 1; i < 5; i++) {
+		if ((row+i > 0 && row+i < 20) && (col+i > 0 && col+i < 20)) {
+			product *= data[row+i][col+i];
+		}
+	}
+
+	return product;
+}
+
+unsigned long int calculate_down(int data[20][20], int row, int col)
+{
+	unsigned long int product = 1;
+	for (int i = 1; i < 5; i++) {
+		if (row+i > 0 && row+i < 20) {
 			product *= data[row+i][col];
 		}
 	}
@@ -118,5 +156,41 @@ unsigned long int calculate_right_up(int data[20][20], int row, int col)
 	return product;
 }
 
+unsigned long int calculate_left_down(int data[20][20], int row, int col)
+{
+	unsigned long int product = 1;
+	for (int i = 1; i < 5; i++) {
+		long int neg = i * -1;
+		if ((row+i > 0 && row+i < 20) && (col+neg > 0 && col+neg < 20)) {
+			product *= data[row+i][col+neg];
+		}
+	}
+
+	return product;
+}
+
+unsigned long int calculate_left(int data[20][20], int row, int col)
+{
+	unsigned long int product = 1;
+	for (int i = -1; i > -5; i--) {
+		if (col+i > 0 && col+i < 20) {
+			product *= data[row][col+i];
+		}
+	}
+
+	return product;
+}
+
+unsigned long int calculate_left_up(int data[20][20], int row, int col)
+{
+	unsigned long int product = 1;
+	for (int i = -1; i > -5; i--) {
+		if ((row+i > 0 && row+i < 20) && (col+i > 0 && col+i < 20)) {
+			product *= data[row+i][col+i];
+		}
+	}
+
+	return product;
+}
 
 
